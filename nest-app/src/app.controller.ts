@@ -41,4 +41,19 @@ export class AppController {
       .getResultList();
     return persons.map((person) => person.constructor.name);
   }
+
+  @Get('tasks-then-fork-em-then-persons')
+  async getTasksThenForkEmThenPersons(): Promise<any> {
+    const tasks = await this.tasksRepository
+      .createQueryBuilder()
+      .getResultList();
+    const persons = await this.em
+      .fork(true)
+      .createQueryBuilder(PersonEntity)
+      .where({
+        id: tasks.map((task) => task.person?.id).filter((id) => id),
+      })
+      .getResultList();
+    return persons.map((person) => person.constructor.name);
+  }
 }

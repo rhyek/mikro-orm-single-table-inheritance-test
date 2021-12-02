@@ -116,4 +116,18 @@ describe('AppController (e2e)', () => {
         ]);
       });
   });
+
+  it('/tasks-then-fork-em-then-persons', async () => {
+    await request(app.getHttpServer())
+      .get('/tasks-then-fork-em-then-persons')
+      .expect(200)
+      .then((response) => {
+        console.log('response', response.body);
+        expect(response.body).toMatchObject([
+          'BossEntity',
+          'EmployeeEntity',
+          'BossEntity',
+        ]);
+      });
+  });
 });
