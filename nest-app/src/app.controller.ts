@@ -29,7 +29,7 @@ export class AppController {
   }
 
   @Get('tasks-then-persons')
-  async getTasksThenPersons(): Promise<any> {
+  async getTasksThenPersons(): Promise<string[]> {
     const tasks = await this.tasksRepository
       .createQueryBuilder()
       .getResultList();
@@ -43,7 +43,7 @@ export class AppController {
   }
 
   @Get('tasks-then-fork-em-then-persons')
-  async getTasksThenForkEmThenPersons(): Promise<any> {
+  async getTasksThenForkEmThenPersons(): Promise<string[]> {
     const tasks = await this.tasksRepository
       .createQueryBuilder()
       .getResultList();
